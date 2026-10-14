@@ -27,6 +27,9 @@ hibernate1
     └── test/java/services SalleServiceTest, MachineServiceTest
 ```
 
+<img width="314" height="443" alt="Capture d&#39;écran 2026-10-14 173918" src="https://github.com/user-attachments/assets/dea0b287-c5e0-48f1-a233-09761ecfe9ab" />
+
+
 ## Étapes réalisées
 
 1. `pom.xml` : Hibernate Core 5.6.15, MySQL Connector 8.0.33, JUnit 5 (+ moteur et plugin Surefire pour lancer les tests avec Maven).
@@ -48,7 +51,20 @@ hibernate1
 3. Exécuter `test.Test` : les tables `salles` et `machines` sont créées et alimentées.
 4. Lancer les tests : `mvn test` (MySQL doit être démarré).
 
-## Remarques
+## Résultats
 
-- Dans le fichier XML, le caractère `&` de l'URL JDBC doit s'écrire `&amp;`.
-- `Machine` contient `ref`, `marque` et `dateAchat` (le diagramme de classes montre `dateAchat`, l'énoncé montre `marque`).
+Exécution de `test.Test` : une salle et une machine sont insérées dans MySQL, puis relues avec `getAll()` et avec la requête HQL `findByMarque("Dell")`.
+
+<img width="680" height="106" alt="TP4" src="https://github.com/user-attachments/assets/4db84e27-6f25-4d74-a517-aa9e99a13b4a" />
+
+### Tables créées dans MySQL
+
+Hibernate a créé automatiquement les tables `salles` et `machines` dans la base `db_tp_hibernate` (`hbm2ddl.auto=update`). Les tests JUnit et les exécutions de `Test` y ont ajouté des lignes.
+
+<img width="692" height="203" alt="Capture d&#39;écran 2026-10-14 173934" src="https://github.com/user-attachments/assets/bcd868b1-04a2-4666-a1b6-f6826d1fdce3" />
+
+### Tests JUnit
+
+Les trois tests passent : création, lecture, modification et suppression d'une salle, et création d'une machine avec la recherche HQL par marque.
+
+<img width="503" height="236" alt="TP4_2" src="https://github.com/user-attachments/assets/778131ba-96ff-4425-8765-bcf44a33cfd2" />
